@@ -31,7 +31,7 @@ public class EmailService {
                     .property(Emailv31.MESSAGES, new JSONArray()
                             .put(new JSONObject()
                                     .put(Emailv31.Message.FROM, new JSONObject()
-                                            .put("Email", "tanay.work11@gmail.com")
+                                            .put("Email", "noreply@studentlink.shribuilds.in")
                                             .put("Name", "StudentLink"))
                                     .put(Emailv31.Message.TO, new JSONArray()
                                             .put(new JSONObject()
@@ -42,8 +42,10 @@ public class EmailService {
                             ));
 
             MailjetResponse response = client.post(request);
+            System.out.println("Status: " + response.getStatus());
+            System.out.println("Response: " + response.getData());
+            if (response.getStatus() >= 200 && response.getStatus() < 300) {
 
-            if (response.getStatus() == 200) {
                 System.out.println("Mail sent successfully to: " + toEmail);
             } else {
                 System.out.println("Mailjet error: " + response.getStatus());
